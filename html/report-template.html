@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!--         // <script type="text/javascript" src="../js/vendor/jquery.js"></script>
+    // <script type="text/javascript" src="../js/vendor/underscore.js"></script>
+    // <script type="text/javascript" src="../js/vendor/jquery-ui-1.10.3.custom.js"></script>
+    // <script type="text/javascript" src="../js/vendor/jquery.dataTables.js"></script> -->
+    <!-- <link rel="stylesheet" href="css/jquery.dataTables.css"> -->
+    <!-- <link rel="stylesheet" href="css/ColVis.css"> -->
+    <!-- <link rel="stylesheet" href="css/TableTools.css"> -->
+    <!-- <link rel="stylesheet" href="css/TableTools_JUI.css">  -->
+    <!-- <link rel="stylesheet" href="css/charts.css"> -->
+    <style type='text/css'>
+    /*
+    * Table
+    */
+    table.dataTable {
+    margin: 0 auto;
+    clear: both;
+    width: 100%;
+    }
+    table.dataTable thead th {
+    padding: 3px 18px 3px 10px;
+    border-bottom: 1px solid black;
+    font-weight: bold;
+    cursor: pointer;
+    *cursor: hand;
+    }
+    table.dataTable tfoot th {
+    padding: 3px 18px 3px 10px;
+    border-top: 1px solid black;
+    font-weight: bold;
+    }
+    table.dataTable td {
+    padding: 3px 10px;
+    }
+    table.dataTable td.center,
+    table.dataTable td.dataTables_empty {
+    text-align: center;
+    }
+    table.dataTable tr.odd { background-color: #E2E4FF; }
+    table.dataTable tr.even { background-color: white; }
+    table.dataTable tr.odd td.sorting_1 { background-color: #D3D6FF; }
+    table.dataTable tr.odd td.sorting_2 { background-color: #DADCFF; }
+    table.dataTable tr.odd td.sorting_3 { background-color: #E0E2FF; }
+    table.dataTable tr.even td.sorting_1 { background-color: #EAEBFF; }
+    table.dataTable tr.even td.sorting_2 { background-color: #F2F3FF; }
+    table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
+    /*
+    * Table wrapper
+    */
+    .dataTables_wrapper {
+    position: relative;
+    clear: both;
+    *zoom: 1;
+    }
+    /*
+    * Page length menu
+    */
+    .dataTables_length {
+    float: left;
+    }
+    /*
+    * Filter
+    */
+    .dataTables_filter {
+    float: right;
+    text-align: right;
+    }
+    /*
+    * Table information
+    */
+    .dataTables_info {
+    clear: both;
+    float: left;
+    }
+    /*
+    * Pagination
+    */
+    .dataTables_paginate {
+    float: right;
+    text-align: right;
+    }
+    /* Two button pagination - previous / next */
+    .paginate_disabled_previous,
+    .paginate_enabled_previous,
+    .paginate_disabled_next,
+    .paginate_enabled_next {
+    height: 19px;
+    float: left;
+    cursor: pointer;
+    *cursor: hand;
+    color: #111 !important;
+    }
+    .paginate_disabled_previous:hover,
+    .paginate_enabled_previous:hover,
+    .paginate_disabled_next:hover,
+    .paginate_enabled_next:hover {
+    text-decoration: none !important;
+    }
+    .paginate_disabled_previous:active,
+    .paginate_enabled_previous:active,
+    .paginate_disabled_next:active,
+    .paginate_enabled_next:active {
+    outline: none;
+    }
+    .paginate_disabled_previous,
+    .paginate_disabled_next {
+    color: #666 !important;
+    }
+    .paginate_disabled_previous,
+    .paginate_enabled_previous {
+    padding-left: 23px;
+    }
+    .paginate_disabled_next,
+    .paginate_enabled_next {
+    padding-right: 23px;
+    margin-left: 10px;
+    }
+    .paginate_enabled_previous { background: url('../images/back_enabled.png') no-repeat top left; }
+    .paginate_enabled_previous:hover { background: url('../images/back_enabled_hover.png') no-repeat top left; }
+    .paginate_disabled_previous { background: url('../images/back_disabled.png') no-repeat top left; }
+    .paginate_enabled_next { background: url('../images/forward_enabled.png') no-repeat top right; }
+    .paginate_enabled_next:hover { background: url('../images/forward_enabled_hover.png') no-repeat top right; }
+    .paginate_disabled_next { background: url('../images/forward_disabled.png') no-repeat top right; }
+    /* Full number pagination */
+    .paging_full_numbers {
+    height: 22px;
+    line-height: 22px;
+    }
+    .paging_full_numbers a:active {
+    outline: none
+    }
+    .paging_full_numbers a:hover {
+    text-decoration: none;
+    }
+    .paging_full_numbers a.paginate_button,
+    .paging_full_numbers a.paginate_active {
+    border: 1px solid #aaa;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 2px 5px;
+    margin: 0 3px;
+    cursor: pointer;
+    *cursor: hand;
+    color: #333 !important;
+    }
+    .paging_full_numbers a.paginate_button {
+    background-color: #ddd;
+    }
+    .paging_full_numbers a.paginate_button:hover {
+    background-color: #ccc;
+    text-decoration: none !important;
+    }
+    .paging_full_numbers a.paginate_active {
+    background-color: #99B3FF;
+    }
+    /*
+    * Processing indicator
+    */
+    .dataTables_processing {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 30px;
+    margin-left: -125px;
+    margin-top: -15px;
+    padding: 14px 0 2px 0;
+    border: 1px solid #ddd;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    background-color: white;
+    }
+    /*
+    * Sorting
+    */
+    .sorting { background: url('../images/sort_both.png') no-repeat center right; }
+    .sorting_asc { background: url('../images/sort_asc.png') no-repeat center right; }
+    .sorting_desc { background: url('../images/sort_desc.png') no-repeat center right; }
+    .sorting_asc_disabled { background: url('../images/sort_asc_disabled.png') no-repeat center right; }
+    .sorting_desc_disabled { background: url('../images/sort_desc_disabled.png') no-repeat center right; }
+    
+    table.dataTable thead th:active,
+    table.dataTable thead td:active {
+    outline: none;
+    }
+    /*
+    * Scrolling
+    */
+    .dataTables_scroll {
+    clear: both;
+    }
+    .dataTables_scrollBody {
+    *margin-top: -1px;
+    -webkit-overflow-scrolling: touch;
+    }
+    
+    </style>
+    <style type='text/css'>
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    * ColVis styles
+    */
+    .ColVis {
+    float: right;
+    margin-bottom: 1em;
+    }
+    .ColVis_Button {
+    position: relative;
+    float: left;
+    margin-right: 3px;
+    padding: 3px 5px;
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #d0d0d0;
+    cursor: pointer;
+    *cursor: hand;
+    }
+    button.ColVis_Button::-moz-focus-inner {
+    border: none !important;
+    padding: 0;
+    }
+    .ColVis_text_hover {
+    border: 1px solid #999;
+    background-color: #f0f0f0;
+    }
+    div.ColVis_collectionBackground {
+    background-color: black;
+    z-index: 1100;
+    }
+    div.ColVis_collection {
+    position: relative;
+    width: 150px;
+    background-color: #f3f3f3;
+    padding: 3px;
+    border: 1px solid #ccc;
+    z-index: 1102;
+    }
+    div.ColVis_collection button.ColVis_Button {
+    background-color: white;
+    width: 100%;
+    float: none;
+    margin-bottom: 2px;
+    }
+    div.ColVis_catcher {
+    position: absolute;
+    z-index: 1101;
+    }
+    .disabled {
+    color: #999;
+    }
+    button.ColVis_Button {
+    text-align: left;
+    }
+    div.ColVis_collection button.ColVis_Button:hover {
+    border: 1px solid #999;
+    background-color: #f0f0f0;
+    }
+    span.ColVis_radio {
+    display: inline-block;
+    width: 20px;
+    }
+    </style>
+    <style type="text/css">
+    /*
+    * File:        TableTools.css
+    * Description: Styles for TableTools 2
+    * Author:      Allan Jardine (www.sprymedia.co.uk)
+    * Language:    Javascript
+    * License:     GPL v2 / 3 point BSD
+    * Project:     DataTables
+    *
+    * Copyright 2009-2012 Allan Jardine, all rights reserved.
+    *
+    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    *
+    * CSS name space:
+    *   DTTT                  DataTables TableTools
+    *
+    * Style sheet provides:
+    *   CONTAINER             TableTools container element and styles applying to all components
+    *   BUTTON_STYLES         Action specific button styles
+    *   SELECTING             Row selection styles
+    *   COLLECTIONS           Drop down list (collection) styles
+    *   PRINTING              Print display styles
+    */
+    /*
+    * CONTAINER
+    * TableTools container element and styles applying to all components
+    */
+    div.DTTT_container {
+    position: relative;
+    float: right;
+    margin-bottom: 1em;
+    }
+    button.DTTT_button,
+    div.DTTT_button,
+    a.DTTT_button {
+    position: relative;
+    float: left;
+    margin-right: 3px;
+    padding: 5px 8px;
+    border: 1px solid #999;
+    cursor: pointer;
+    *cursor: hand;
+    font-size: 0.88em;
+    color: black !important;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 1px 1px 3px #ccc;
+    -moz-box-shadow: 1px 1px 3px #ccc;
+    -ms-box-shadow: 1px 1px 3px #ccc;
+    -o-box-shadow: 1px 1px 3px #ccc;
+    box-shadow: 1px 1px 3px #ccc;
+    /* Generated by http://www.colorzilla.com/gradient-editor/ */
+    background: #ffffff; /* Old browsers */
+    background: -webkit-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* Chrome10+,Safari5.1+ */
+    background:    -moz-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* FF3.6+ */
+    background:     -ms-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* IE10+ */
+    background:      -o-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* Opera 11.10+ */
+    background:         linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f9f9f9',GradientType=0 ); /* IE6-9 */
+    }
+    /* Buttons are cunning border-box sizing - we can't just use that for A and DIV due to IE6/7 */
+    button.DTTT_button {
+    height: 30px;
+    padding: 3px 8px;
+    }
+    .DTTT_button embed {
+    outline: none;
+    }
+    button.DTTT_button:hover,
+    div.DTTT_button:hover,
+    a.DTTT_button:hover {
+    border: 1px solid #666;
+    text-decoration: none !important;
+    -webkit-box-shadow: 1px 1px 3px #999;
+    -moz-box-shadow: 1px 1px 3px #999;
+    -ms-box-shadow: 1px 1px 3px #999;
+    -o-box-shadow: 1px 1px 3px #999;
+    box-shadow: 1px 1px 3px #999;
+    background: #f3f3f3; /* Old browsers */
+    background: -webkit-linear-gradient(top, #f3f3f3 0%,#e2e2e2 89%,#f4f4f4 100%); /* Chrome10+,Safari5.1+ */
+    background:    -moz-linear-gradient(top, #f3f3f3 0%,#e2e2e2 89%,#f4f4f4 100%); /* FF3.6+ */
+    background:     -ms-linear-gradient(top, #f3f3f3 0%,#e2e2e2 89%,#f4f4f4 100%); /* IE10+ */
+    background:      -o-linear-gradient(top, #f3f3f3 0%,#e2e2e2 89%,#f4f4f4 100%); /* Opera 11.10+ */
+    background:         linear-gradient(top, #f3f3f3 0%,#e2e2e2 89%,#f4f4f4 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3f3f3', endColorstr='#f4f4f4',GradientType=0 ); /* IE6-9 */
+    }
+    button.DTTT_disabled,
+    div.DTTT_disabled,
+    a.DTTT_disabled {
+    color: #999;
+    border: 1px solid #d0d0d0;
+    
+    background: #ffffff; /* Old browsers */
+    background: -webkit-linear-gradient(top, #ffffff 0%,#f9f9f9 89%,#fafafa 100%); /* Chrome10+,Safari5.1+ */
+    background:    -moz-linear-gradient(top, #ffffff 0%,#f9f9f9 89%,#fafafa 100%); /* FF3.6+ */
+    background:     -ms-linear-gradient(top, #ffffff 0%,#f9f9f9 89%,#fafafa 100%); /* IE10+ */
+    background:      -o-linear-gradient(top, #ffffff 0%,#f9f9f9 89%,#fafafa 100%); /* Opera 11.10+ */
+    background:         linear-gradient(top, #ffffff 0%,#f9f9f9 89%,#fafafa 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fafafa',GradientType=0 ); /* IE6-9 */
+    }
+    /*
+    * BUTTON_STYLES
+    * Action specific button styles
+    * If you want images - comment this back in
+    a.DTTT_button_csv,
+    a.DTTT_button_xls,
+    a.DTTT_button_copy,
+    a.DTTT_button_pdf,
+    a.DTTT_button_print {
+    padding-right: 0px;
+    }
+    a.DTTT_button_csv span,
+    a.DTTT_button_xls span,
+    a.DTTT_button_copy span,
+    a.DTTT_button_pdf span,
+    a.DTTT_button_print span {
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    padding-right: 30px;
+    }
+    a.DTTT_button_csv span { background: url(../images/csv.png) no-repeat bottom right; }
+    a.DTTT_button_csv:hover span { background: url(../images/csv_hover.png) no-repeat center right; }
+    a.DTTT_button_xls span { background: url(../images/xls.png) no-repeat center right; }
+    a.DTTT_button_xls:hover span { background: #f0f0f0 url(../images/xls_hover.png) no-repeat center right; }
+    a.DTTT_button_copy span { background: url(../images/copy.png) no-repeat center right; }
+    a.DTTT_button_copy:hover span { background: #f0f0f0 url(../images/copy_hover.png) no-repeat center right; }
+    a.DTTT_button_pdf span { background: url(../images/pdf.png) no-repeat center right; }
+    a.DTTT_button_pdf:hover span { background: #f0f0f0 url(../images/pdf_hover.png) no-repeat center right; }
+    a.DTTT_button_print span { background: url(../images/print.png) no-repeat center right; }
+    a.DTTT_button_print:hover span { background: #f0f0f0 url(../images/print_hover.png) no-repeat center right; }
+    */
+    button.DTTT_button_collection span {
+    padding-right: 17px;
+    background: url(../images/collection.png) no-repeat center right;
+    }
+    button.DTTT_button_collection:hover span {
+    padding-right: 17px;
+    background: #f0f0f0 url(../images/collection_hover.png) no-repeat center right;
+    }
+    /*
+    * SELECTING
+    * Row selection styles
+    */
+    table.DTTT_selectable tbody tr {
+    cursor: pointer;
+    *cursor: hand;
+    }
+    table.dataTable tr.DTTT_selected.odd {
+    background-color: #9FAFD1;
+    }
+    table.dataTable tr.DTTT_selected.odd td.sorting_1 {
+    background-color: #9FAFD1;
+    }
+    table.dataTable tr.DTTT_selected.odd td.sorting_2 {
+    background-color: #9FAFD1;
+    }
+    table.dataTable tr.DTTT_selected.odd td.sorting_3 {
+    background-color: #9FAFD1;
+    }
+    table.dataTable tr.DTTT_selected.even {
+    background-color: #B0BED9;
+    }
+    table.dataTable tr.DTTT_selected.even td.sorting_1 {
+    background-color: #B0BED9;
+    }
+    table.dataTable tr.DTTT_selected.even td.sorting_2 {
+    background-color: #B0BED9;
+    }
+    table.dataTable tr.DTTT_selected.even td.sorting_3 {
+    background-color: #B0BED9;
+    }
+    /*
+    * COLLECTIONS
+    * Drop down list (collection) styles
+    */
+    div.DTTT_collection {
+    width: 150px;
+    padding: 8px 8px 4px 8px;
+    border: 1px solid #ccc;
+    border: 1px solid rgba( 0, 0, 0, 0.4 );
+    background-color: #f3f3f3;
+    background-color: rgba( 255, 255, 255, 0.3 );
+    overflow: hidden;
+    z-index: 2002;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    
+    -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    -ms-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    -o-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    }
+    div.DTTT_collection_background {
+    background: transparent url(../images/background.png) repeat top left;
+    z-index: 2001;
+    }
+    div.DTTT_collection button.DTTT_button,
+    div.DTTT_collection div.DTTT_button,
+    div.DTTT_collection a.DTTT_button {
+    position: relative;
+    left: 0;
+    right: 0;
+    display: block;
+    float: none;
+    margin-bottom: 4px;
+    
+    -webkit-box-shadow: 1px 1px 3px #999;
+    -moz-box-shadow: 1px 1px 3px #999;
+    -ms-box-shadow: 1px 1px 3px #999;
+    -o-box-shadow: 1px 1px 3px #999;
+    box-shadow: 1px 1px 3px #999;
+    }
+    /*
+    * PRINTING
+    * Print display styles
+    */
+    .DTTT_print_info {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 150px;
+    margin-left: -200px;
+    margin-top: -75px;
+    text-align: center;
+    color: #333;
+    padding: 10px 30px;
+    background: #ffffff; /* Old browsers */
+    background: -webkit-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* Chrome10+,Safari5.1+ */
+    background:    -moz-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* FF3.6+ */
+    background:     -ms-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* IE10+ */
+    background:      -o-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* Opera 11.10+ */
+    background:         linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f9f9f9',GradientType=0 ); /* IE6-9 */
+    
+    opacity: 0.95;
+    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    border-radius: 6px;
+    
+    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
+    -ms-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
+    }
+    .DTTT_print_info h6 {
+    font-weight: normal;
+    font-size: 28px;
+    line-height: 28px;
+    margin: 1em;
+    }
+    .DTTT_print_info p {
+    font-size: 14px;
+    line-height: 20px;
+    }
+    </style>
+    <style type="text/css">
+    /*
+    * File:        TableTools.css
+    * Description: Styles for TableTools 2 with JUI theming
+    * Author:      Allan Jardine (www.sprymedia.co.uk)
+    * Language:    Javascript
+    * License:     LGPL / 3 point BSD
+    * Project:     DataTables
+    *
+    * Copyright 2010 Allan Jardine, all rights reserved.
+    *
+    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    *
+    * Notes:
+    *   Generally speaking, please refer to the TableTools.css file - this file contains basic
+    *   modifications to that 'master' stylesheet for ThemeRoller.
+    *
+    * CSS name space:
+    *   DTTT                  DataTables TableTools
+    *
+    * Colour dictionary:
+    *   Button border         #d0d0d0
+    *   Button border hover   #999999
+    *   Hover background      #f0f0f0
+    *   Action blue           #4b66d9
+    *
+    * Style sheet provides:
+    *   CONTAINER             TableTools container element and styles applying to all components
+    *   SELECTING             Row selection styles
+    *   COLLECTIONS           Drop down list (collection) styles
+    *   PRINTING              Print display styles
+    *   MISC                  Minor misc styles
+    */
+    /*
+    * CONTAINER
+    * TableTools container element and styles applying to all components
+    */
+    div.DTTT_container {
+    position: relative;
+    float: left;
+    }
+    .DTTT_button {
+    position: relative;
+    float: left;
+    margin-right: 3px;
+    padding: 3px 10px;
+    border: 1px solid #d0d0d0;
+    background-color: #fff;
+    color: #333 !important;
+    cursor: pointer;
+    *cursor: hand;
+    }
+    .DTTT_button::-moz-focus-inner {
+    border: none !important;
+    padding: 0;
+    }
+    /*
+    * SELECTING
+    * Row selection styles
+    */
+    table.DTTT_selectable tbody tr {
+    cursor: pointer;
+    *cursor: hand;
+    }
+    table.dataTable tr.DTTT_selected.odd {
+    background-color: #9FAFD1;
+    }
+    table.dataTable tr.DTTT_selected.odd td.sorting_1 {
+    background-color: #9FAFD1;
+    }
+    table.dataTable tr.DTTT_selected.odd td.sorting_2 {
+    background-color: #9FAFD1;
+    }
+    table.dataTable tr.DTTT_selected.odd td.sorting_3 {
+    background-color: #9FAFD1;
+    }
+    table.dataTable tr.DTTT_selected.even {
+    background-color: #B0BED9;
+    }
+    table.dataTable tr.DTTT_selected.even td.sorting_1 {
+    background-color: #B0BED9;
+    }
+    table.dataTable tr.DTTT_selected.even td.sorting_2 {
+    background-color: #B0BED9;
+    }
+    table.dataTable tr.DTTT_selected.even td.sorting_3 {
+    background-color: #B0BED9;
+    }
+    /*
+    * COLLECTIONS
+    * Drop down list (collection) styles
+    */
+    div.DTTT_collection {
+    width: 150px;
+    background-color: #f3f3f3;
+    overflow: hidden;
+    z-index: 2002;
+    
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    }
+    div.DTTT_collection_background {
+    background: url(../images/background.png) repeat top left;
+    z-index: 2001;
+    }
+    div.DTTT_collection button.DTTT_button,
+    div.DTTT_collection div.DTTT_button,
+    div.DTTT_collection a.DTTT_button {
+    float: none;
+    width: 100%;
+    margin-bottom: -0.1em;
+    }
+    /*
+    * PRINTING
+    * Print display styles
+    */
+    .DTTT_print_info {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 150px;
+    margin-left: -200px;
+    margin-top: -75px;
+    text-align: center;
+    background-color: #3f3f3f;
+    color: white;
+    padding: 10px 30px;
+    
+    opacity: 0.9;
+    
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    }
+    .DTTT_print_info h6 {
+    font-weight: normal;
+    font-size: 28px;
+    line-height: 28px;
+    margin: 1em;
+    }
+    .DTTT_print_info p {
+    font-size: 14px;
+    line-height: 20px;
+    }
+    /*
+    * MISC
+    * Minor misc styles
+    */
+    .DTTT_disabled {
+    color: #999;
+    }
+    </style>
+    <style type="text/css">
+    #pie-charts
+    {
+    width: 49.5%;
+    height: 99%;
+    display: inline-block;
+    position: absolute;
+    top:0px;
+    }
+    #bar-charts
+    {
+    width: 49.5%;
+    height: 99%;
+    display: inline-block;
+    }
+    #pie{
+    width: 30%;
+    }
+    .labels
+    {
+    width: 100%;
+    }
+    .label{
+    display: inline-block;
+    width: 300px;
+    text-align: center;
+    }
+    .large-label{
+    width: 908px;
+    text-align: center;
+    }
+    #cstats > div,
+    #astats > div,
+    #tstats > div,
+    #pstats > div{
+    display: inline-block;
+    width: 29%;
+    }
+    .hstat
+    {
+    background-color: red;
+    }
+    .mstat
+    {
+    background-color: orange;
+    }
+    .lstat
+    {
+    background-color:green;
+    }
+    
+    #chart-wrapper{
+    width: 908px;
+    overflow-x:hidden;
+    }
+    #high > .legend-entry
+    {
+    background-color: red;
+    }
+    #medium >  .legend-entry
+    {
+    background-color: orange;
+    }
+    #low > .legend-entry
+    {
+    background-color: green;
+    }
+    #legend
+    {
+    position: absolute;
+    top: 337px;
+    }
+    #legend > ul
+    {
+    list-style: none;
+    }
+    #legend div
+    /*#legend li*/
+    {
+    display: inline-block;
+    }
+    .legend-entry
+    {
+    height:22px;
+    width:22px;
+    }
+    </style>
+    <style type="text/css">
+    body,html{
+    margin: 0;
+    padding:0;
+    }
+    #report-body{
+    width: 13.25in;
+    }
+    .page
+    {
+    /*width: 10.5in !important;*/
+    width: 12.9in !important;
+    /*height:12.5in;*/
+    height:9.35in;
+    page-break-after:always;
+    border: 1px solid black;
+    padding-left:.25in;
+    padding-right:.25in;
+    padding-top: .5in;
+    padding-bottom: .5in;
+    }
+    .mobile.page{
+        height: 9.1in !important;
+        width: 12.75in !important;
+
+    }
+    .page:last-child
+    {
+    page-break-after:avoid;
+    }
+    #report-body h1{
+    font-size: 1.7em;
+    }
+    .float-left{
+    float:left;
+    }
+    .float-right{
+    float:right;
+    }
+    .report-header{
+    width:50%;
+    display:inline;
+    }
+    #practice-info
+    {
+    top:60%;
+    width: 30%;
+    height: 70%;
+    left: 20%;
+    }
+    #practice-info p
+    {
+    padding: 0;
+    margin: 0;
+    }
+    #charts
+    {
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    position: relative;
+    }
+    .inventory >p,
+    .associate >p,
+    .user >p{
+    padding: 0;
+    margin: 0;
+    }
+    .user,
+    .associate,
+    .inventory{
+    margin-bottom: 5px;
+    }
+    </style>
+    <script type="text/javascript">
+    // $(document).ready(function(){
+    //     $(".reportTable").each(function(){
+    //         $(this).dataTable();
+    //     })
+    // })
+    </script>
+  </head>
+  <div id='loader'></div>
+  <body id="report-body">
+    <%content%>
+    <%tables%>
+  </body>
+</html>

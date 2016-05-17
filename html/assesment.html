@@ -1,0 +1,25 @@
+<script type="text/javascript" src="js/pagescripts/assesment.js"></script>
+
+<div id="assesment-container" class="fill">
+  <div id='progress-bar'>
+  <div id='progress-bar-filler'></div>
+    
+  </div>
+  <div id="assesment-wrapper" class="center">
+    <div id="question-container">
+    </div>
+    <div id="answer-container">
+    </div>
+  </div>
+  <div id="nav-buttons">
+    <div id="prev-button" class="buttons nav-button left">Previous<br> Question</div>
+    <div id="next-button" class="buttons nav-button">Next<br> Question</div>
+    <div id="report-button" onClick="RAT.Reporting.runReport()" class="buttons nav-button">Report</div>
+    <div id="glossary-button" onClick="RAT.Panels.loadGlossary()"class="buttons nav-button">Glossary</div>
+    <div id="glossary-button" onClick="RAT.Panels.loadNavigator()"class="buttons nav-button">Navigator</div>
+    <div id="glossary-button" onClick="RAT.Assessment.showRelatedInfo()"class="buttons nav-button">Related Info</div>
+  </div>
+</div>
+
+
+

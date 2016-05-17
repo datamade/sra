@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+  <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>HHS - Risk Assessment Tool</title>
+        <meta name="description" content="">
+        <!-- <meta name="viewport" content="width=device-width"> -->
+
+        <script type="text/javascript">
+            if(typeof localStorage === 'undefined')
+                localStorage={}; // make it work on AIR as it does not support localStore
+        </script>
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- // <script type='text/javascript' src="js/vendor/cordova.js"></script>     -->
+        
+        <!-- // <script type="text/javascript" src="js/vendor/modernizr-2.6.2.min.js"></script> -->
+        <script type="text/javascript" src="js/vendor/jquery.js"></script>
+        <script type="text/javascript" src="js/vendor/jquery-node-changer.js"></script>
+        <script type="text/javascript" src="js/vendor/underscore.js"></script>
+        <script type="text/javascript" src="js/vendor/jquery.cookie.js"></script>
+        <script type="text/javascript" src="js/vendor/jquery.hotkeys.js"></script>
+        <script type="text/javascript" src="js/vendor/jquery.jstree.js"></script>
+        <script type="text/javascript" src="js/vendor/jquery-ui-1.10.3.custom.js"></script>
+        <script type="text/javascript" src="js/vendor/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="js/vendor/moment.js"></script>
+        <script type="text/javascript" src="js/jspdf.source.js"></script>
+        <script type="text/javascript" src="js/vendor/FileSaver.js"></script>
+        <script type="text/javascript" src="js/vendor/highlight.js"></script>
+        <script src="js/vendor/ColVis.min.js"></script>    
+        <script src="js/vendor/TableTools.js"></script>    
+        <script src="js/vendor/ZeroClipboard.js"></script>    
+
+
+        <script src="cordova.js"></script>
+        <!-- // <script src="plugins/org.dscape.snapshot/www/Snapshot.js"></script> -->
+        <script src="js/rat.js"></script> 
+        <script src="js/plugins.js"></script>
+        <script src="js/hhs_risk_items.js"></script> 
+        <script src="js/hhs_glossary.js"></script> 
+        <script src="js/navigator_data.js"></script> 
+        <script src="js/templtr.js"></script>    
+        <script src="js/index.js"></script>    
+        <script src="js/main.js"></script>    
+        <script src="js/utils.js"></script>    
+          
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.css">
+        <link rel="stylesheet" href="css/report_page.css">
+        <link rel="stylesheet" href="css/report_table.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/jquery.dataTables.css">
+        <link rel="stylesheet" href="css/ColVis.css">
+        <link rel="stylesheet" href="css/sitestyles.css">
+        <link rel="stylesheet" href="css/TableTools.css">
+        <link rel="stylesheet" href="css/TableTools_JUI.css"> 
+        <style type="text/css">
+       .page
+        {
+            /*width: 10.5in !important;*/
+            width: 12.75in !important;
+            /*height:12.5in;*/
+            height:9.3in;
+            page-break-after:always;
+            border: 1px solid black;
+            padding-left:.25in; 
+            padding-right:.25in;
+            padding-top: .5in;
+            padding-bottom: .5in; 
+        }
+        </style>
+    </head>
+    <body>
+        <div id="loader"></div>
+        <div id="dialog-confirm" class='hidden' title="Print Report?">
+          <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Would you like to print your report?</p>
+        </div>
+        <div id="site-contatiner">
+            <div id="site-wrapper">
+                <div id='tutorial-button' onclick='RAT.Utils.openExternalLink("http://www.HealthIT.gov/security-risk-assessment")'></div>
+                <div id="header">
+                    <div id="header-menu">
+                    <ul>
+                        <li id="current-user">Current User: none</li> |
+                        <li id="logout">Logout</li> |
+                        <!-- <li>Help</li> | -->
+                        <li onclick='RAT.Utils.openExternalLink("http://www.HealthIT.gov")'><a>www.HealthIT.gov</a></li>
+                    </ul>
+                    </div>
+                </div>
+                <div id="floating-panel" class="fill">
+                    <div id="fade" class="fill"></div>
+                    <div id="close-floating-panel" onClick="RAT.Utils.closeFloatingPanel()">X</div>
+                    <div id="floating-panel-wrapper" class="center">
+
+                        <div id="floating-panel-content" class=""></div>
+                    </div>
+                </div>
+                <div id="full-panel"  class="container-panel fill-width"></div>
+                <div id="left-panel"  class="container-panel"></div>
+                <div id="right-panel" class="container-panel"></div>
+            </div>
+        </div>
+    </body>

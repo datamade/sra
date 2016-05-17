@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="css/charts.css">
+<script type="text/javascript" src="js/chart.min.js"></script>
+<script type="text/javascript" src="js/pagescripts/chartpage.js"></script>
+
+<div id="chart-wrapper" class="center">
+    <canvas id="A-pie" width="300" height="150"></canvas>
+    <canvas id="P-pie"  width="300" height="150"></canvas>
+    <canvas id="T-pie"  width="300" height="150"></canvas>
+    <div class="labels">
+      <div class="label">Administrative
+        <div id="astats">
+
+        </div>
+      </div>
+      <div class="label">Physical
+        <div id="pstats">
+
+        </div>
+      </div>
+      <div class="label">Technical
+        <div id="tstats">
+
+        </div>
+      </div>
+    </div>
+    <canvas id="full-pie" width="905" height="300"></canvas>
+    <div class="large-label">Combined
+      <div id="cstats">
+
+      </div>
+    </div>
+    <div id="legend">
+      <ul>
+        <li id='high'><div class='legend-entry'></div>High</li>
+        <li id='medium'><div class='legend-entry'></div>Medium</li>
+        <li id='low'><div class='legend-entry'></div>Low</li>
+      </ul>
+    </div>
+    <div id='table-chart-toggle' class='buttons'>Table View</div>
+
+</div>

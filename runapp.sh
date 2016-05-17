@@ -1,0 +1,2 @@
+nw $PWD &
+exit()

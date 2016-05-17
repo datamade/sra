@@ -1,0 +1,792 @@
+html,
+body{
+  height: 768px;
+  width: 1024px;
+  background-color: gray;
+  position: absolute;
+  top: 0;
+  left:0;
+  overflow: hide;
+}
+a{
+  text-decoration: underline !important;
+  color: blue;
+  cursor: pointer;
+}
+#navigator a{
+  text-decoration: none !important;
+
+}
+
+.High{
+color:red;
+}
+.Medium{
+color:orange;
+}
+.Low{
+color:green;
+}
+#loader{
+  /*display: none;*/
+}
+#tutorial-button
+{
+width: 150px;
+height: 25px;
+  position: relative;
+right:5px;
+/*background-color: green;*/
+display: inline;
+float: right;
+z-index: 5;
+}
+
+#export-report-pdf
+{
+  width: 10%;
+  margin-bottom: 1%;
+  text-align: center;
+  position: absolute;
+  left: 13%;
+  top:0px;
+  z-index: 5;
+}
+#export-report-excel
+{
+  width: 10%;
+  margin-bottom: 1%;
+  text-align: center;
+  position: absolute;
+  left: 26%;
+  top:0px;
+  z-index: 5;
+
+}
+#table-chart-toggle
+{
+  width: 10%;
+  margin-bottom: 1%;
+  text-align: center;
+  position: absolute;
+  left:0px;
+  top:0px;
+  z-index: 5;
+
+}
+
+
+
+
+
+.highlight
+{
+  /*text-decoration: underline;*/
+  border-bottom: 1px dotted;
+}
+.hidden{
+  display: hidden;
+}
+#loader
+{
+  /*display: hidden;*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+#site-container{
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+}
+
+#site-wrapper{
+  background-color: white;
+  position: relative;
+  height: 768px;
+  width: 1024px;
+}
+
+#header
+{
+  position: relative;
+  height:59px;
+  width:100%;
+  background-image: url(../images/topmenu.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+}
+.container-panel{
+   height: 92%;
+}
+#left-panel
+{
+    width: 60%;
+    float: left;
+    position: relative;
+    background-color: white;
+    border-radius: 0 0 15px 15px;
+    border-style: solid;
+    border-color: rgb(47, 112, 182);
+    border-width: 2px;
+}
+#right-panel{
+  
+  width: 39.1%;
+  left: auto;
+  float: left;
+  position: relative;
+  background-color: white;
+  border-radius: 0 0 15px 15px;
+  border-style: solid;
+  border-color: rgb(47, 112, 182);
+  border-width: 2px;
+}
+
+#floating-panel
+{
+  position: absolute;
+  top:0;
+  left:0;
+  display: none;
+}
+
+#fade
+{
+  background-color: rgba(0,0,0,.25);
+  z-index:2;
+  display: inline;
+  position: absolute;
+  top:0;
+  left:0;
+}
+
+#floating-panel-wrapper
+{
+  background-color: white;
+  width: 95%;
+  height:80%;
+  top:10%;
+  z-index: 2;
+  position: relative;
+   border-radius: 20px 20px 20px 20px;
+  border-style: solid;
+  border-color: rgb(47, 112, 182);
+  border-width: 2px;
+}
+#close-floating-panel
+{
+  width: 25px;
+  height: 25px;
+  float: right;
+  background-color: #fce6a4;
+  border-radius: 20px 20px 20px 20px;
+  border-style: solid;
+  border-color: rgb(47, 112, 182);
+  border-width: 2px;
+  text-align: center;
+  font-weight: bold;
+  alignment-baseline: middle;
+  top: 9%;
+  position: relative;
+  z-index: 4;
+  left: -1.5%; 
+}
+
+#floating-panel-content
+{
+  overflow-y:auto;
+  position: relative;
+  margin-left: 1.5%;
+  margin-right: 1.5%;
+  top:2.5%;
+  height: 95%
+}
+
+/*header stuff*/
+#header-menu
+{
+  position: relative;
+  left: 54%;
+  top: 60%;
+  width: 470px;
+}
+#header-menu ul
+{
+   margin: 0 1em 0 0;
+  position: relative;
+  list-style: none;
+  bottom: 0;
+  right: 0;
+  color: rgb(19, 75, 150);
+  cursor: pointer;
+}
+#header-menu li
+{
+  display: inline;
+}
+
+#welcomeimg
+{
+  width: 354px;
+  height: 209px;
+  margin: 0 auto;
+  background-image: url('../images/RATwelcome.jpg');
+  background-size:354px 209px;
+}
+
+.center
+{
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.fill
+{
+  height:100%;
+  width: 100%;
+  position: relative;
+}
+.fill-height{
+  height: 100%;
+}
+.fill-width{
+  width: 100%;
+}
+input,
+select
+{
+  margin-top:2.5%
+}
+#practice-questions-content-wrapper
+{
+  width: 97%;
+  border: 3px solid rgb(47, 112, 182);
+  height: auto;
+  margin-bottom: 2.5%;
+  background-color: #FFFFCC;
+  overflow-y:auto;
+  max-height:441px;
+}
+
+#practice-questions-content
+{
+  width: 97%;
+  height: auto;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+}
+
+#practice-catagories{
+  border: 1px solid #4297d7;
+  background: #5c9ccc url(redmond/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png) 50% 50% repeat-x;
+  height: 52px;
+  width: 98%;
+  border-radius: 5px 5px 0px 0px;
+  margin-top: 2.5%;
+}
+
+#practice-catagories ul{
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  width: 98%;
+  position: relative;
+  top: 14px;
+  height: 100%;
+}
+
+#practice-catagories li > div
+{
+  text-align: center;
+  vertical-align: middle;
+}
+
+#practice-catagories li 
+{
+  border-radius: 5px 5px 0px 0px;
+  border: 1px solid #c5dbec;
+  background: #dfeffc url(redmond/images/ui-bg_glass_85_dfeffc_1x400.png) 50% 50% repeat-x;
+  font-weight: bold;
+  color: #2e6e9e;
+  display: inline;
+  width: 24%;
+  position:relative;
+  float: left;
+  height:70%;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.associate-entry
+{
+  height:28px;
+}
+.associate-entry > input
+{
+  width: 29%;
+  float: left;
+  display: inline;
+  margin-left: 2.5%;
+  margin-top: 0 !important;
+}
+
+.asset-entry
+{
+  height: 28px;
+}
+.asset-entry > input
+{
+  width: 22%;
+  float: left;
+  display: inline;
+  margin-left: .5%;
+  margin-top: 0 !important;
+}
+
+.user-entry
+{
+  height: 28px;
+}
+.user-entry > input
+{
+  width: 24%;
+  float: left;
+  display: inline;
+  margin-left: .5%;
+  margin-top: 0 !important;
+  display: none;
+}
+.user-entry > div
+{
+  width: 25%;
+  float: left;
+  display: inline;
+  margin-left: .5%;
+  margin-top: 0 !important;
+  display: inline;
+}
+
+.user-entry.selected > input
+{
+  display: inline;
+}
+.user-entry.selected > div
+{
+  display: none;
+}
+
+.user-entry.selected > .buttons
+{
+  display: inline;
+}
+
+.user-entry:last-child > input
+{
+  display: inline;
+}
+.user-entry:last-child > div
+{
+  display: none;
+}
+.user-entry:last-child > div
+{
+  display: none;
+}
+
+.user-entry > .login-button
+{
+  width: 15%;
+  float:left;
+  display: inline;
+  margin-left: .5%;
+  margin-top: 0 !important;
+  
+}
+
+.login-button
+{
+  text-align: center;
+  height: 14px;
+  margin-left: .5%;
+}
+
+.selected-tab
+{
+  color: #e17009 !important;
+}
+
+#full-panel
+{
+  display: inline;
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  background-color: white;
+  border-radius: 0 0 15px 15px;
+  border-style: solid;
+  border-color: rgb(47, 112, 182);
+  border-width: 2px;
+}
+
+#info-tabs > div
+{
+  max-height: 560px;
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+#information-screen
+{
+  width:70%;
+  overflow-y:scroll;
+  height:100%;
+  margin-left: 10%
+}
+#start-assesment-button
+{
+  position: absolute;
+  right:0;
+  bottom:0;
+  margin-bottom: 2.5%;
+  margin-right: 2.5%;
+}
+
+#assesment-wrapper
+{
+  /*kpadding:0% 2.5% 2.5% 2.5%;*/
+  width: 95%;
+  height: 88%;
+}
+
+#question-title
+{
+  width: 105%;
+  margin-left: -2.5%;
+  text-align: center;
+  background-color: #FFFF99;
+  position: relative;
+  /*top:-56px;*/
+}
+#question-content-container{
+
+}
+#question-content-container
+{
+  /*left: 28px;*/
+  /*top: 45px;*/
+  position: relative;
+  /*height: 172px;*/
+  /*width: 450px;*/
+/*  background-color: #CCC;
+  border-radius: 10px;
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(0, 153, 255);*/
+}
+
+.content-panel
+{
+ background-color: #CCC;
+  border-radius: 10px;
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(0, 153, 255); 
+}
+
+
+.blue-text {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 14px;
+font-weight: bold;
+color: #003366;
+cursor: default;
+}
+
+.normal-text
+{
+  font-family: Arial, Helvetica, sans-serif;
+font-size: 14px;
+font-weight: bold;
+cursor: default;
+
+}
+
+
+#input-catagories{
+  border: 1px solid #4297d7;
+  background: #5c9ccc url(redmond/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png) 50% 50% repeat-x;
+  height: 25px;
+  width: 99.5%;
+  border-radius: 5px 5px 0px 0px;
+  margin-top: 2.5%;
+}
+
+#input-catagories ul{
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  width: 98%;
+  position: relative;
+  top: 12px;
+  height: 100%;
+}
+
+#input-catagories li > div
+{
+  text-align: center;
+  vertical-align: middle;
+}
+
+#input-catagories li > div > a
+{
+  text-decoration: none;
+  color:black;
+}
+
+
+#input-catagories li 
+{
+  border-radius: 5px 5px 0px 0px;
+  border: 1px solid #c5dbec;
+  background: #dfeffc url(redmond/images/ui-bg_glass_85_dfeffc_1x400.png) 50% 50% repeat-x;
+  font-weight: bold;
+  color: #2e6e9e;
+  display: inline;
+  width: 32%;
+  position:relative;
+  float: left;
+  height:70%;
+  font-size: 14px;
+  cursor: pointer;
+  top: -7px;
+  left:5px;
+}
+#explanation-box
+{
+  height:100px;
+}
+
+.no-margin
+{
+  margin: 0;
+}
+
+.no-padding
+{
+  padding: 0;
+}
+
+#impact lable,
+#impact input,
+#impact p,
+#likelihood lable,
+#likelihood input,
+#likelihood p{
+  display: inline-block;
+  width: auto;
+}
+
+#answer-wrapper
+{
+  margin-top:2.5%;
+  height:420px;
+  max-height:420px; 
+}
+
+#remediation-box,
+#activites-box
+{
+  height:230px;
+  min-height: 230px;
+  max-height: 230px;
+  overflow-x:hidden !important;
+}
+
+#details
+{
+  height:260px;
+  max-height:260px;
+  min-height:260px;
+}
+
+#note-display
+{
+  height: 175px;
+  background-color:white;
+  overflow-y:auto;
+}
+#note-input
+{
+  height: 50px;
+  max-height: 50px;
+  position: relative;
+  bottom: 0px;
+  margin-top:5px; 
+  width: 89%;
+  display: inline-block;
+
+}
+
+#note-add
+{
+  position: relative;
+  top:15px;
+  display: inline-block;
+  width: 5%;
+}
+
+.nav-button
+{
+  position: relative;
+  display: inline-block;
+  top:5px;
+  text-align: center;
+  margin: 1.5%;
+  z-index:1;
+}
+
+#nav-buttons
+{
+  height:71px;
+  width: 1024px;
+}
+
+#report-button,
+#glossary-button
+{
+  left:38%;
+  margin: .5% !important;
+}
+
+.tab{
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+#next-button
+{
+  left:38%;
+}
+.left
+{
+  float:left;
+}
+.right
+{
+  float:right;
+}
+
+.tabText {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 13px;
+font-weight: bold;
+}
+/*
+//////////////////////////////////////////////
+//Navigator
+//////////////////////////////////////////////
+*/
+.expand
+{
+  position: absolute;
+  left: 300px;
+}
+#navigator
+{
+  overflow-y: auto;
+  margin-left:.25%;
+  margin-right:.25%;
+  border: .5px solid #b3d4fc;
+  border-bottom: none;
+  background: none;
+  max-height: 620px;
+  min-height: 620px;
+
+}
+#navigator a
+{
+  display: inline;
+}
+.completionStats
+{
+  display: inline-block;
+  position: relative;
+  right: 75px;
+  margin: 0;
+  text-align: center;
+  top:inherit;
+  float:right;
+  width:5%;
+}
+#navigator div
+{
+  display: inline-block;
+}
+#nav-title
+{
+  left:100px;
+  position: relative;
+  display: inline-block;
+}
+
+#stats{
+  display: inline-block;
+  position: relative;
+  left:75px;
+}
+
+#navigator a { white-space:normal !important; height: auto; padding:1px 2px; line-height: 16px; }
+#navigator li > ins { vertical-align:top; }
+#navigator .jstree-hovered, #navigator .jstree-clicked { border:0; }
+
+#navigator li:nth-child(even)
+{
+  background-color:white;
+}
+#navigator li:nth-child(odd)
+{
+  background-color: rgb(235,241,253);
+}
+
+#nav-title
+{
+  font-size: 24;
+  font-weight: bold;
+  text-align: center;
+}
+
+#progress-bar{
+  width: 99%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1px;
+  height:8px;
+  border:2px solid rgb(47, 112, 182);
+  border-radius: 2px;
+}
+#progress-bar-filler{
+  width: 25%;
+  height:8px;
+  background-color: rgb(47, 112, 182);
+}
+
+#header-menu-content > li{
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+#related-info-tabs > li > a{
+  text-align: center;
+  text-decoration: none !important;
+}
+
+#welcomeScreen >  p{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+

@@ -1,0 +1,95 @@
+#pie-charts
+{
+  width: 49.5%;
+  height: 99%;
+  display: inline-block;
+  position: absolute;
+  top:0px;
+}
+
+#bar-charts
+{
+  width: 49.5%;
+  height: 99%;
+  display: inline-block;
+}
+
+#pie{
+  width: 30%;
+}
+.labels
+{
+  width: 100%;
+}
+.label{
+  display: inline-block;
+  width: 300px;
+  text-align: center;
+}
+.large-label{
+  width: 908px;
+  text-align: center;
+
+}
+
+#cstats > div,
+#astats > div,
+#tstats > div,
+#pstats > div{
+display: inline-block;  
+width: 29%;
+}
+.hstat
+{
+  background-color: red;
+}
+.mstat
+{
+  background-color: orange;
+}
+.lstat
+{
+  background-color:green;
+}
+  
+
+#chart-wrapper{
+  width: 908px;
+  overflow-x:hidden;
+}
+
+#high > .legend-entry
+{
+  background-color: red;
+}
+#medium >  .legend-entry
+{
+  background-color: orange;
+}
+#low > .legend-entry
+{
+  background-color: green;
+}
+
+#legend
+{
+  position: absolute;
+  top: 337px;
+}
+
+#legend > ul
+{
+   list-style: none;
+}
+
+
+#legend div
+/*#legend li*/
+{
+  display: inline-block;
+}
+.legend-entry
+{
+  height:22px;
+  width:22px;
+}

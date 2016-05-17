@@ -1,0 +1,19 @@
+{
+  "name": "HHS",
+  "main": "index.html",
+  "window": {
+    "toolbar": false,
+    "width": 1028,
+    "height": 777,
+    "resizable": false,
+    "icon": "icon.png"
+  },
+  "webkit": {
+    "plugin": true
+  },
+  "dependencies": {
+    "officegen": ">=0.2.0",
+    "phantomjs": ">=1.9.2-5",
+    "capture": "~0.1.0"
+  }
+}
